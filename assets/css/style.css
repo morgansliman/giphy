@@ -1,0 +1,31 @@
+body {
+	background-color: #f2f2f2;
+}
+
+.hid {
+	display: none;
+}
+
+.button-list::after {
+	content: '';
+	clear: both;
+}
+
+.button-topic {
+	margin: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.gif-rating {
+}
+
+.gif-list {
+	display: inline;
+}
+
+.gif-wrapper {
+	margin: 20px 10px 20px 10px;
+	display: inline;
+	float: left;
+}
