@@ -25,7 +25,7 @@ $(document).ready(function() {
 
 	var baseURL = 'https://api.giphy.com/v1/gifs/search?q=',
 	 	key = '&api_key=dc6zaTOxFJmzC',
-	 	limitURL = '&limit=10';
+	 	limit = 10;
 
 	for (var i = 0; i < topics.length; i++) {
 		$('.button-list').append(
@@ -45,14 +45,14 @@ $(document).ready(function() {
 			source = {};
 
 			$.ajax({
-				url: (baseURL + encodeURIComponent($('#gif-input').val()) + key + limitURL),
+				url: (baseURL + encodeURIComponent($('#gif-input').val()) + key + '&limit=' + limit),
 				method: 'GET'
 			}).done(function(response) {
 				
 				$('.gif-list').empty();
 
 				var i = 0;
-				for (var j = 0; j < 4; j++) {
+				for (var j = 0; j < (limit / 3); j++) {
 					$('.gif-list').append(
 						$('<div>', {
 							'class': 'row'
@@ -73,7 +73,7 @@ $(document).ready(function() {
 
 						source[response.data[i].id] = response.data[i].images.fixed_width.url;
 						i += 1;
-					} while ( (i % 3) != 0 && i < 10);
+					} while ( (i % 3) != 0 && i < limit);
 				} 
 
 				$('.gif').on('click', function() {
@@ -90,14 +90,14 @@ $(document).ready(function() {
 		source = {};
 
 		$.ajax({
-			url: (baseURL + encodeURIComponent($(this).text()) + key + limitURL),
+			url: (baseURL + encodeURIComponent($(this).text()) + key + '&limit=' + limit),
 			method: 'GET'
 		}).done(function(response) {
 			
 			$('.gif-list').empty();
 
 			var i = 0;
-			for (var j = 0; j < 4; j++) {
+			for (var j = 0; j <= (limit / 3); j++) {
 				$('.gif-list').append(
 					$('<div>', {
 						'class': 'row'
@@ -118,7 +118,7 @@ $(document).ready(function() {
 
 					source[response.data[i].id] = response.data[i].images.fixed_width.url;
 					i += 1;
-				} while ( (i % 3) != 0 && i < 10);
+				} while ( (i % 3) != 0 && i < limit);
 			} 
 
 			$('.gif').on('click', function() {
@@ -132,6 +132,18 @@ $(document).ready(function() {
 	$('#gif-input').keyup(function(event) {
 		if (event.keyCode == 13) {
 			$('#addGif').click();
+		}
+	});
+
+	$('.button-limit').on('click', function() {
+		if ($(this).hasClass('active') == false) {
+			for (var i = 0; i < $('.limit-wrapper').children().length; i++) {
+				$('.limit-wrapper').children().eq(i).removeClass('active');
+			}
+
+			$(this).addClass('active');
+			limit = $(this).text();
+			console.log(limit);
 		}
 	});
 });
