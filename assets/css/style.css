@@ -14,7 +14,7 @@ body {
 }
 
 .input-text {
-	font-size: 20px;
+	font-size: 24px;
 	color: #555;
 }
 
@@ -49,8 +49,25 @@ input {
 
 .limit-wrapper {
 	margin-top: 10px;
+	width: 40%;
+	float: left;
 }
 
 .limit-text {
+	font-size: 20px;
 	margin-top: 20px;
+	color: #555;
+}
+
+#button-random {
+	display: inline;
+	margin-left: 5px;
+	padding: 5px 15px;
+	border-radius: 15px;
+}
+
+.random-text {
+	display: inline;
+	padding-left: 10px;
+	display: none;
 }

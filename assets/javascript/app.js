@@ -143,7 +143,37 @@ $(document).ready(function() {
 
 			$(this).addClass('active');
 			limit = $(this).text();
-			console.log(limit);
 		}
+	});
+
+	$('#button-random').hover(function() {
+		$('.random-text').css('display', 'inline');
+	}, function() {
+		$('.random-text').hide();
+	});
+
+	$('#button-random').on('click', function() {
+		$('.gif-list').empty();
+
+		var query = 'https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC';
+
+		if ($('#gif-input').val().length > 0) {
+			query = query + '&tag=' + encodeURIComponent($('#gif-input').val());
+		}
+
+		$.ajax({
+			url: query,
+			method: 'GET'
+		}).done(function(response) {
+			console.log(query, '\n', response);
+
+			$('.gif-list').append(
+				$('<div>', {
+					'class': 'gif-wrapper'
+				}).html(
+					'<img class="gif" src="' + response.data.image_original_url + '">'
+				)
+			);
+		});
 	});
 });
