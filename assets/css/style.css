@@ -2,10 +2,6 @@ body {
 	background-color: #f2f2f2;
 }
 
-.hid {
-	display: none;
-}
-
 .button-list::after {
 	content: '';
 	clear: both;
@@ -17,11 +13,36 @@ body {
 	padding-right: 15px;
 }
 
-.gif-rating {
+.input-text {
+	font-size: 20px;
+	color: #555;
+}
+
+input {
+	display: block;
+}
+
+#gif-input {
+	margin: 10px 0;
+	width: 100%;
+	border: 1px solid #337ab7;
+	border-radius: 15px;
+	padding-left: 10px;
+	font-size: 20px;
+}
+
+#addGif {
+	margin: 0;
+	padding: 5px 15px;
+	border-radius: 15px;
 }
 
 .gif-wrapper {
 	margin: 20px 10px 20px 10px;
 	display: inline;
 	float: left;
+}
+
+.search-wrapper {
+	margin-top: 20px;
 }
