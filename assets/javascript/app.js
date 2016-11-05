@@ -23,7 +23,7 @@ $(document).ready(function() {
 		'frog'
 	];
 
-	var baseURL = 'http://api.giphy.com/v1/gifs/search?q=',
+	var baseURL = 'https://api.giphy.com/v1/gifs/search?q=',
 	 	key = '&api_key=dc6zaTOxFJmzC',
 	 	limitURL = '&limit=10';
 
