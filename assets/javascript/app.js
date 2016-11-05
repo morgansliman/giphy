@@ -25,7 +25,8 @@ $(document).ready(function() {
 
 	var baseURL = 'https://api.giphy.com/v1/gifs/search?q=',
 	 	key = '&api_key=dc6zaTOxFJmzC',
-	 	limit = 10;
+	 	limit = 10,
+	 	rating = '';
 
 	for (var i = 0; i < topics.length; i++) {
 		$('.button-list').append(
@@ -45,7 +46,7 @@ $(document).ready(function() {
 			source = {};
 
 			$.ajax({
-				url: (baseURL + encodeURIComponent($('#gif-input').val()) + key + '&limit=' + limit),
+				url: (baseURL + encodeURIComponent($('#gif-input').val()) + key + '&limit=' + limit + rating),
 				method: 'GET'
 			}).done(function(response) {
 				
@@ -75,12 +76,6 @@ $(document).ready(function() {
 						i += 1;
 					} while ( (i % 3) != 0 && i < limit);
 				} 
-
-				$('.gif').on('click', function() {
-					var temp = $(this).attr('src');
-					$(this).attr('src', source[$(this).data('id')]);
-					source[$(this).data('id')] = temp;
-				});
 			});
 		}
 	});
@@ -90,19 +85,19 @@ $(document).ready(function() {
 		source = {};
 
 		$.ajax({
-			url: (baseURL + encodeURIComponent($(this).text()) + key + '&limit=' + limit),
+			url: (baseURL + encodeURIComponent($(this).text()) + key + '&limit=' + limit + rating),
 			method: 'GET'
 		}).done(function(response) {
-			
+
 			$('.gif-list').empty();
 
 			var i = 0;
-			for (var j = 0; j <= (limit / 3); j++) {
+			for (var j = 0; j < (limit / 3); j++) {
 				$('.gif-list').append(
 					$('<div>', {
 						'class': 'row'
 					})
-				)
+				);
 
 				do {
 					$('.gif-list').children().eq(-1).append(
@@ -114,18 +109,12 @@ $(document).ready(function() {
 							'<img class="gif" src="' + response.data[i].images.fixed_width_still.url + '"' +
 							'data-id="' + response.data[i].id + '">'
 						)
-					)
+					);
 
 					source[response.data[i].id] = response.data[i].images.fixed_width.url;
 					i += 1;
 				} while ( (i % 3) != 0 && i < limit);
 			} 
-
-			$('.gif').on('click', function() {
-				var temp = $(this).attr('src');
-				$(this).attr('src', source[$(this).data('id')]);
-				source[$(this).data('id')] = temp;
-			});
 		});
 	});
 
@@ -143,6 +132,21 @@ $(document).ready(function() {
 
 			$(this).addClass('active');
 			limit = $(this).text();
+		}
+	});
+
+	$('.button-rating').on('click', function() {
+		if ($(this).hasClass('active') == false) {
+			for (var i = 0; i < $('.rating-wrapper').children().length; i++) {
+				$('.rating-wrapper').children().eq(i).removeClass('active');
+			}
+
+			$(this).addClass('active');
+			if ($(this).text() == 'None') {
+				rating = '';
+			} else {
+				rating = '&rating=' + $(this).text();
+			}
 		}
 	});
 
@@ -175,5 +179,11 @@ $(document).ready(function() {
 				)
 			);
 		});
+	});
+
+	$(document).on('click', '.gif', function() {
+		var temp = $(this).attr('src');
+		$(this).attr('src', source[$(this).data('id')]);
+		source[$(this).data('id')] = temp;
 	});
 });

@@ -49,14 +49,29 @@ input {
 
 .limit-wrapper {
 	margin-top: 10px;
-	width: 40%;
 	float: left;
+	width: 100%;
 }
 
 .limit-text {
 	font-size: 20px;
 	margin-top: 20px;
 	color: #555;
+}
+
+.rating-text {
+	font-size: 20px;
+	margin-top: 20px;
+	color: #555;
+}
+
+.rating-wrapper {
+	margin-top: 10px;
+	float: left;
+}
+
+.rating-area {
+	margin-top: 60px;
 }
 
 #button-random {
